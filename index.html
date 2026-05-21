@@ -32,56 +32,43 @@
     .font-serif { font-family: 'Playfair Display', Georgia, serif; }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Reading progress */
     #read-progress { position: fixed; top: 0; left: 0; height: 2px; background: #1a1a1a; z-index: 100; width: 0%; transition: width 0.1s; }
     .dark #read-progress { background: #e5e5e5; }
 
-    /* Custom scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #d4cfc5; border-radius: 3px; }
     .dark ::-webkit-scrollbar-thumb { background: #404040; }
 
-    /* Animations */
     .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
 
-    /* Hero text animation */
     @keyframes text-reveal {
       from { clip-path: inset(0 100% 0 0); }
       to { clip-path: inset(0 0 0 0); }
     }
     .text-reveal { animation: text-reveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
 
-    /* Card hover lift */
     .card-lift { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease; }
     .card-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 60px -15px rgba(0,0,0,0.12); }
     .dark .card-lift:hover { box-shadow: 0 20px 60px -15px rgba(0,0,0,0.4); }
 
-    /* Image zoom */
     .img-zoom { overflow: hidden; }
     .img-zoom img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
     .img-zoom:hover img { transform: scale(1.05); }
 
-    /* Underline hover */
     .hover-underline { position: relative; }
-    .hover-underline::after {
-      content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px;
-      background: currentColor; transition: width 0.3s ease;
-    }
+    .hover-underline::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: currentColor; transition: width 0.3s ease; }
     .hover-underline:hover::after { width: 100%; }
 
-    /* Search overlay */
     .search-overlay { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 
-    /* Category pill active */
     .pill-active { background: #1a1a1a; color: #faf9f7; }
     .dark .pill-active { background: #e5e5e5; color: #1a1a1a; }
 
-    /* Line clamp */
     .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   </style>
@@ -91,20 +78,17 @@
 
   <div id="read-progress"></div>
 
-  <!-- Navbar -->
   <nav class="fixed top-0 w-full z-50 border-b border-paper-200 dark:border-[#1f1f1f] bg-paper-50/80 dark:bg-[#0f0f0f]/80 backdrop-blur-md transition-colors duration-500">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="index.html" class="flex items-baseline gap-2 group">
         <span class="font-serif text-2xl font-semibold tracking-tight">BlogSphere</span>
         <span class="w-1.5 h-1.5 rounded-full bg-ink dark:bg-white opacity-40 group-hover:opacity-100 transition-opacity"></span>
       </a>
-
       <div class="hidden md:flex items-center gap-8 text-sm font-medium">
         <a href="#featured" class="hover-underline opacity-70 hover:opacity-100 transition-opacity">Latest</a>
         <a href="#articles" class="hover-underline opacity-70 hover:opacity-100 transition-opacity">Articles</a>
         <a href="#newsletter" class="hover-underline opacity-70 hover:opacity-100 transition-opacity">Newsletter</a>
       </div>
-
       <div class="flex items-center gap-4">
         <button onclick="toggleSearch()" class="p-2 opacity-60 hover:opacity-100 transition-opacity" aria-label="Search">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="m21 21-3.9-3.9m0 0A7.5 7.5 0 1 0 5.2 5.2a7.5 7.5 0 0 0 10.6 10.6Z"/></svg>
@@ -117,7 +101,6 @@
     </div>
   </nav>
 
-  <!-- Search Overlay -->
   <div id="searchOverlay" class="fixed inset-0 z-[60] search-overlay bg-paper-50/90 dark:bg-[#0f0f0f]/90 hidden items-start justify-center pt-28 opacity-0 transition-opacity duration-300">
     <div class="w-full max-w-xl mx-4">
       <div class="flex items-center border-b-2 border-ink/20 dark:border-white/20 pb-3">
@@ -129,7 +112,6 @@
     </div>
   </div>
 
-  <!-- Hero -->
   <section id="featured" class="pt-32 pb-16 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="reveal">
@@ -145,19 +127,16 @@
     </div>
   </section>
 
-  <!-- Featured Post (Latest) -->
   <section class="px-6 pb-12">
     <div class="max-w-6xl mx-auto">
       <div id="featuredPost" class="reveal reveal-delay-1"></div>
     </div>
   </section>
 
-  <!-- Divider -->
   <div class="max-w-6xl mx-auto px-6 py-8">
     <div class="h-px bg-ink/10 dark:bg-white/10"></div>
   </div>
 
-  <!-- Filters -->
   <section id="articles" class="px-6 py-8">
     <div class="max-w-6xl mx-auto flex flex-wrap items-center gap-3 mb-10">
       <span class="font-mono text-xs tracking-widest uppercase opacity-40 mr-4">Filter</span>
@@ -168,7 +147,6 @@
       <button onclick="filterCategory('Security')" id="btn-Security" class="px-5 py-2 rounded-full text-sm font-medium border border-ink/15 dark:border-white/15 hover:border-ink/40 dark:hover:border-white/40 transition-all duration-300 opacity-70 hover:opacity-100">Security</button>
     </div>
 
-    <!-- Article Grid -->
     <div class="max-w-6xl mx-auto">
       <div id="blogContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14"></div>
       <div id="noResults" class="hidden text-center py-24">
@@ -177,7 +155,6 @@
     </div>
   </section>
 
-  <!-- Newsletter -->
   <section id="newsletter" class="px-6 py-24">
     <div class="max-w-6xl mx-auto">
       <div class="border-t border-ink/10 dark:border-white/10 pt-20">
@@ -193,7 +170,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="px-6 py-12 border-t border-ink/10 dark:border-white/10">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-baseline gap-2">
@@ -212,9 +188,20 @@
     </div>
   </footer>
 
-  <!-- DATA -->
   <script>
     const blogs = [
+      { id: 16, title: "The Ethics of AI-Generated Content", category: "Technology", date: "2026-06-02", readTime: 8,
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
+        description: "Navigating the moral landscape of machine-generated art, code, and journalism in an era of synthetic creativity.",
+        content: `<p class="mb-6">As AI systems become capable of producing text, images, and code indistinguishable from human output, we face profound ethical questions about authorship, authenticity, and accountability.</p><p class="mb-6">The line between tool and creator blurs when a model trained on millions of human works generates a bestseller or award-winning image. Who owns the output? Who is responsible for its flaws?</p><h2 class="text-3xl font-bold mb-4">Attribution & Ownership</h2><p class="mb-6">Current copyright frameworks were not designed for non-human creators. Courts and legislatures worldwide are grappling with whether AI-generated works qualify for protection, or if they infringe on the training data used to build them.</p><h2 class="text-3xl font-bold mb-4">Transparency & Trust</h2><p class="mb-6">The most immediate ethical obligation is transparency. Readers, users, and consumers deserve to know when content is AI-generated. Disclosure builds trust and preserves the social contract between creators and audiences.</p>` },
+      { id: 15, title: "Responsive Typography: A Modern Approach", category: "Design", date: "2026-06-01", readTime: 6,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1200&auto=format&fit=crop",
+        description: "How fluid type scales, viewport units, and clamp() are revolutionizing the way we size text across devices.",
+        content: `<p class="mb-6">Fixed breakpoints for typography are a relic of the past. Modern web design demands type that breathes and adapts continuously across the infinite spectrum of screen sizes.</p><p class="mb-6">CSS clamp(), viewport units, and fluid type scales allow text to resize smoothly between minimum and maximum values, eliminating jarring jumps at arbitrary breakpoints.</p><h2 class="text-3xl font-bold mb-4">The Fluid Formula</h2><p class="mb-6">A well-designed fluid scale uses a combination of viewport width and rem units to ensure accessibility. Users who zoom their browser still see appropriately sized text, while the base scale adapts to device context.</p><h2 class="text-3xl font-bold mb-4">Practical Implementation</h2><p class="mb-6">Start with a modular scale. Define your minimum and maximum sizes, then use calc() and clamp() to bridge them. Tools like Utopia.fyi generate complete fluid type systems with a few parameters.</p>` },
+      { id: 14, title: "Edge Computing: The Next Frontier", category: "Development", date: "2026-05-30", readTime: 9,
+        image: "https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=1200&auto=format&fit=crop",
+        description: "Why moving computation closer to users is reshaping cloud architecture and enabling real-time experiences.",
+        content: `<p class="mb-6">The centralized cloud model is being challenged by a distributed paradigm where computation happens at the network edge, milliseconds from the end user.</p><p class="mb-6">Edge computing reduces latency, minimizes bandwidth costs, and enables real-time interactions that would be impossible if every request had to round-trip to a distant data center.</p><h2 class="text-3xl font-bold mb-4">Use Cases</h2><p class="mb-6">Autonomous vehicles, industrial IoT, augmented reality, and multiplayer gaming all require sub-50ms response times. Edge nodes placed in ISP networks, cell towers, and even customer premises make this feasible.</p><h2 class="text-3xl font-bold mb-4">The Developer Experience</h2><p class="mb-6">Platforms like Cloudflare Workers, Vercel Edge Functions, and AWS Lambda@Edge abstract away infrastructure complexity. Developers write functions that deploy globally in seconds, running at the edge without managing servers.</p>` },
       { id: 13, title: "The State of Web3 in 2026", category: "Technology", date: "2026-05-28", readTime: 10,
         image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1200&auto=format&fit=crop",
         description: "Beyond the hype: how decentralized technologies are finding real utility in identity, finance, and digital ownership.",
@@ -303,13 +290,8 @@
       const container = document.getElementById('blogContainer');
       const noResults = document.getElementById('noResults');
       container.innerHTML = '';
-
-      if (list.length === 0) {
-        noResults.classList.remove('hidden');
-        return;
-      }
+      if (list.length === 0) { noResults.classList.remove('hidden'); return; }
       noResults.classList.add('hidden');
-
       list.forEach((blog, i) => {
         const card = document.createElement('a');
         card.href = `blog.html?id=${blog.id}`;
@@ -326,21 +308,15 @@
           <h3 class="font-serif text-xl md:text-2xl font-medium leading-snug tracking-tight group-hover:opacity-70 transition-opacity line-clamp-2 mb-2">${blog.title}</h3>
           <p class="text-sm opacity-50 leading-relaxed line-clamp-2 mb-3">${blog.description}</p>
           <div class="flex items-center gap-2 font-mono text-[10px] opacity-40 tracking-wider">
-            <span>${formatDate(blog.date)}</span>
-            <span>&middot;</span>
-            <span>${blog.readTime} MIN</span>
+            <span>${formatDate(blog.date)}</span><span>&middot;</span><span>${blog.readTime} MIN</span>
           </div>
         `;
         container.appendChild(card);
       });
-
-      // Trigger reveal animations
       setTimeout(() => {
         document.querySelectorAll('.reveal').forEach(el => {
           const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
           }, { threshold: 0.1 });
           observer.observe(el);
         });
@@ -368,11 +344,7 @@
       searchQuery = query.toLowerCase();
       const results = document.getElementById('searchResults');
       if (!query.trim()) { results.innerHTML = ''; return; }
-      const matches = blogs.filter(b =>
-        b.title.toLowerCase().includes(searchQuery) ||
-        b.description.toLowerCase().includes(searchQuery) ||
-        b.category.toLowerCase().includes(searchQuery)
-      );
+      const matches = blogs.filter(b => b.title.toLowerCase().includes(searchQuery) || b.description.toLowerCase().includes(searchQuery) || b.category.toLowerCase().includes(searchQuery));
       results.innerHTML = matches.map(b => `
         <a href="blog.html?id=${b.id}" onclick="toggleSearch()" class="flex items-start gap-4 p-4 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5 transition-colors group">
           <img src="${b.image}" class="w-16 h-16 rounded-md object-cover flex-shrink-0">
@@ -386,12 +358,7 @@
 
     function applyFilters() {
       let filtered = currentCategory === 'All' ? blogs.slice(1) : blogs.filter(b => b.category === currentCategory);
-      if (currentCategory === 'All') filtered = blogs.slice(1); // skip featured
-      else filtered = blogs.filter(b => b.category === currentCategory);
-      if (searchQuery) filtered = filtered.filter(b =>
-        b.title.toLowerCase().includes(searchQuery) ||
-        b.description.toLowerCase().includes(searchQuery)
-      );
+      if (searchQuery) filtered = filtered.filter(b => b.title.toLowerCase().includes(searchQuery) || b.description.toLowerCase().includes(searchQuery));
       displayBlogs(filtered);
     }
 
@@ -403,8 +370,7 @@
     function toggleSearch() {
       const overlay = document.getElementById('searchOverlay');
       if (overlay.classList.contains('hidden')) {
-        overlay.classList.remove('hidden');
-        overlay.classList.add('flex');
+        overlay.classList.remove('hidden'); overlay.classList.add('flex');
         setTimeout(() => overlay.classList.remove('opacity-0'), 10);
         document.getElementById('searchInput').focus();
       } else {
@@ -413,20 +379,17 @@
       }
     }
 
-    // Scroll progress
     window.addEventListener('scroll', () => {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       document.getElementById('read-progress').style.width = (scrollTop / scrollHeight * 100) + '%';
     });
 
-    // Keyboard
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') { const o = document.getElementById('searchOverlay'); if (!o.classList.contains('hidden')) toggleSearch(); }
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); toggleSearch(); }
     });
 
-    // Init
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     }
