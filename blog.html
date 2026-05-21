@@ -1,207 +1,257 @@
-<!-- =========================
-FILE: blog.html
-========================= -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blog Details</title>
-
+  <title>Blog Details — BlogSphere</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    body{
-      font-family:'Inter',sans-serif;
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+          }
+        }
+      }
     }
+  </script>
+  <style>
+    .glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .prose h2 { font-size: 1.75rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; }
+    .prose p { margin-bottom: 1.25rem; line-height: 1.85; color: inherit; }
+    .fade-in { animation: fadeIn 0.6s ease-out; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(12px);} to { opacity:1; transform:translateY(0);} }
   </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+  <!-- Reading Progress -->
+  <div class="fixed top-0 left-0 w-full h-1 z-[60]">
+    <div id="readProgress" class="h-full bg-primary-600 transition-all duration-150" style="width:0%"></div>
+  </div>
 
   <!-- Navbar -->
-  <header class="bg-white shadow-sm sticky top-0 z-50">
-
+  <header class="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-950/80 glass border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-      <a
-        href="index.html"
-        class="text-3xl font-extrabold text-indigo-600"
-      >
-        BlogSphere
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center text-white font-bold text-lg group-hover:scale-110 transition-transform">B</div>
+        <span class="text-2xl font-bold tracking-tight">BlogSphere</span>
       </a>
-
-      <a
-        href="index.html"
-        class="bg-indigo-600 text-white px-5 py-2 rounded-xl hover:bg-indigo-700"
-      >
-        Back
-      </a>
-
+      <div class="flex items-center gap-3">
+        <button onclick="toggleDark()" class="p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900 transition">
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
+        </button>
+        <a href="index.html" class="px-5 py-2.5 bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-xl text-sm font-semibold transition">← Back to Articles</a>
+      </div>
     </div>
-
   </header>
 
-  <!-- Blog Content -->
-  <main class="max-w-4xl mx-auto px-6 py-16">
+  <!-- Article Header -->
+  <section id="articleHeader" class="pt-32 pb-12 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div id="blogMeta" class="fade-in"></div>
+    </div>
+  </section>
 
-    <div
-      id="blogDetails"
-      class="bg-white rounded-3xl overflow-hidden shadow-lg"
-    ></div>
+  <!-- Hero Image -->
+  <div class="max-w-5xl mx-auto px-6 mb-12">
+    <div id="blogHero" class="rounded-3xl overflow-hidden shadow-2xl fade-in" style="animation-delay:0.1s"></div>
+  </div>
 
-  </main>
+  <!-- Article Body -->
+  <article class="max-w-3xl mx-auto px-6 pb-20">
+    <div id="blogContent" class="prose dark:prose-invert text-gray-700 dark:text-gray-300 text-lg leading-relaxed fade-in" style="animation-delay:0.2s"></div>
+
+    <!-- Tags -->
+    <div id="blogTags" class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800"></div>
+
+    <!-- Share -->
+    <div class="mt-8 flex items-center gap-4">
+      <span class="text-sm font-semibold text-gray-500">Share:</span>
+      <button onclick="shareTwitter()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+      </button>
+      <button onclick="shareLinkedIn()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </button>
+      <button onclick="copyLink()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 transition relative">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
+        <span id="copyTooltip" class="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 transition-opacity">Copied!</span>
+      </button>
+    </div>
+  </article>
+
+  <!-- Related Articles -->
+  <section class="max-w-7xl mx-auto px-6 pb-20">
+    <div class="border-t border-gray-200 dark:border-gray-800 pt-16">
+      <h2 class="text-2xl font-bold mb-8">More Articles</h2>
+      <div id="relatedGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+    <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center text-white font-bold">B</div>
+        <span class="text-xl font-bold">BlogSphere</span>
+      </div>
+      <p class="text-gray-500 text-sm">© 2026 BlogSphere. Crafted for the modern web.</p>
+      <div class="flex gap-4">
+        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+        </a>
+        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
 
   <!-- BLOG DATA -->
   <script>
-
     const blogs = [
-
-      {
-        id: 1,
-        title: "The Future of AI in Web Development",
-        category: "Technology",
-        date: "2026-05-16",
-
-        image:
-          "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
-
-        content:
-          `
-            <p class="mb-6">
-              Artificial Intelligence is transforming the web industry.
-            </p>
-
-            <p class="mb-6">
-              Developers now use AI for automation, testing and code generation.
-            </p>
-
-            <h2 class="text-3xl font-bold mb-4">
-              Future Scope
-            </h2>
-
-            <p class="mb-6">
-              AI-powered interfaces will become standard in future applications.
-            </p>
-          `
-      },
-
-      {
-        id: 2,
-        title: "Minimal UI Design Trends in 2026",
-        category: "Design",
-        date: "2026-05-15",
-
-        image:
-          "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
-
-        content:
-          `
-            <p class="mb-6">
-              Minimal design focuses on clarity and simplicity.
-            </p>
-
-            <p class="mb-6">
-              Modern interfaces now prioritize spacing and typography.
-            </p>
-          `
-      },
-
-      {
-        id: 3,
-        title: "Why JavaScript Still Dominates",
-        category: "Development",
-        date: "2026-05-12",
-
-        image:
-          "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200&auto=format&fit=crop",
-
-        content:
-          `
-            <p class="mb-6">
-              JavaScript remains the backbone of modern web apps.
-            </p>
-
-            <p class="mb-6">
-              Frameworks like React and Next.js keep it highly relevant.
-            </p>
-          `
-      }
-
+      { id: 6, title: "Building Scalable Microservices", category: "Development", date: "2026-05-21", readTime: 8,
+        image: "https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=1200&auto=format&fit=crop",
+        description: "Architectural patterns for modern distributed systems.",
+        content: `<p class="mb-6">Microservices allow teams to build, deploy, and scale components independently.</p><p class="mb-6">Containerization with Docker and orchestration with Kubernetes have become the industry standard.</p><h2 class="text-3xl font-bold mb-4">Design Principles</h2><p class="mb-6">Focus on loose coupling, API-first design, and observability to ensure your services remain maintainable at scale.</p>` },
+      { id: 5, title: "Cybersecurity Best Practices for 2026", category: "Security", date: "2026-05-20", readTime: 6,
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop",
+        description: "Essential security strategies every developer should know.",
+        content: `<p class="mb-6">As cyber threats evolve, so must our defense strategies.</p><p class="mb-6">Zero-trust architecture, multi-factor authentication, and continuous monitoring are now baseline requirements.</p><h2 class="text-3xl font-bold mb-4">Key Takeaways</h2><p class="mb-6">Implement secure coding practices, keep dependencies updated, and never underestimate the value of employee training.</p>` },
+      { id: 4, title: "The Rise of Quantum Computing", category: "Technology", date: "2026-05-19", readTime: 7,
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop",
+        description: "How quantum computing is set to revolutionize problem solving.",
+        content: `<p class="mb-6">Quantum computing leverages the principles of quantum mechanics to process information in fundamentally new ways.</p><p class="mb-6">Unlike classical computers that use bits, quantum computers use qubits which can exist in multiple states simultaneously.</p><h2 class="text-3xl font-bold mb-4">Real-World Applications</h2><p class="mb-6">From drug discovery to cryptography, quantum computing promises breakthroughs in fields previously thought impossible to scale.</p>` },
+      { id: 1, title: "The Future of AI in Web Development", category: "Technology", date: "2026-05-16", readTime: 5,
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
+        description: "Explore how AI is transforming modern web applications.",
+        content: `<p class="mb-6">Artificial Intelligence is changing the way developers build modern applications.</p><p class="mb-6">AI tools can generate code, automate testing and improve user experiences.</p><h2 class="text-3xl font-bold mb-4">Why AI Matters</h2><p class="mb-6">Businesses are rapidly integrating AI into products to increase efficiency and innovation.</p>` },
+      { id: 2, title: "Minimal UI Design Trends in 2026", category: "Design", date: "2026-05-15", readTime: 4,
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
+        description: "Latest minimalist design principles for modern interfaces.",
+        content: `<p class="mb-6">Minimalism continues to dominate modern UI design.</p><p class="mb-6">Designers focus on clean layouts, spacing and typography.</p>` },
+      { id: 3, title: "Why JavaScript Still Dominates", category: "Development", date: "2026-05-12", readTime: 6,
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200&auto=format&fit=crop",
+        description: "Understanding why JavaScript remains the top language.",
+        content: `<p class="mb-6">JavaScript powers frontend and backend development.</p><p class="mb-6">Its ecosystem is massive and continues to evolve rapidly.</p>` },
     ];
 
-  </script>
-
-  <!-- MAIN SCRIPT -->
-  <script>
-
     const params = new URLSearchParams(window.location.search);
-
     const blogId = Number(params.get("id"));
-
     const blog = blogs.find(item => item.id === blogId);
 
-    const blogDetails = document.getElementById("blogDetails");
-
-    if(blog){
-
-      blogDetails.innerHTML = `
-
-        <img
-          src="${blog.image}"
-          class="w-full h-[400px] object-cover"
-        >
-
-        <div class="p-10">
-
-          <div class="flex items-center gap-4 mb-6">
-
-            <span class="bg-indigo-100 text-indigo-600 px-4 py-2 rounded-full text-sm">
-              ${blog.category}
-            </span>
-
-            <span class="text-gray-500">
-              ${blog.date}
-            </span>
-
-          </div>
-
-          <h1 class="text-5xl font-extrabold mb-8 leading-tight">
-            ${blog.title}
-          </h1>
-
-          <div class="text-lg text-gray-700 leading-9">
-            ${blog.content}
-          </div>
-
-        </div>
-
-      `;
-
-    } else {
-
-      blogDetails.innerHTML = `
-
-        <div class="p-10 text-center">
-
-          <h2 class="text-4xl font-bold mb-4">
-            Blog Not Found
-          </h2>
-
-          <p class="text-gray-500">
-            The requested blog does not exist.
-          </p>
-
-        </div>
-
-      `;
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     }
 
-  </script>
+    if (blog) {
+      document.title = `${blog.title} — BlogSphere`;
 
+      document.getElementById('blogMeta').innerHTML = `
+        <div class="flex items-center gap-3 mb-6">
+          <span class="px-4 py-1.5 rounded-full bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 text-sm font-semibold">${blog.category}</span>
+          <span class="text-gray-400 text-sm">${formatDate(blog.date)}</span>
+          <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+          <span class="text-gray-500 text-sm">${blog.readTime} min read</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">${blog.title}</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400">${blog.description}</p>
+      `;
+
+      document.getElementById('blogHero').innerHTML = `
+        <img src="${blog.image}" class="w-full h-[320px] md:h-[480px] object-cover" alt="${blog.title}">
+      `;
+
+      document.getElementById('blogContent').innerHTML = blog.content;
+
+      document.getElementById('blogTags').innerHTML = `
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-sm font-semibold text-gray-500 mr-2">Tags:</span>
+          <span class="px-4 py-1.5 rounded-full bg-gray-100 dark:bg-gray-900 text-sm font-medium">${blog.category}</span>
+          <span class="px-4 py-1.5 rounded-full bg-gray-100 dark:bg-gray-900 text-sm font-medium">2026</span>
+          <span class="px-4 py-1.5 rounded-full bg-gray-100 dark:bg-gray-900 text-sm font-medium">Article</span>
+        </div>
+      `;
+
+      // Related articles
+      const related = blogs.filter(b => b.id !== blog.id).slice(0, 3);
+      const relatedGrid = document.getElementById('relatedGrid');
+      relatedGrid.innerHTML = related.map((b, i) => `
+        <a href="blog.html?id=${b.id}" class="group block bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 fade-in" style="animation-delay:${i*0.1}s">
+          <div class="relative overflow-hidden">
+            <img src="${b.image}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" alt="${b.title}">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+              <span>${formatDate(b.date)}</span>
+              <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+              <span>${b.readTime} min read</span>
+            </div>
+            <h3 class="text-lg font-bold group-hover:text-primary-600 transition-colors line-clamp-2">${b.title}</h3>
+          </div>
+        </a>
+      `).join('');
+    } else {
+      document.getElementById('blogMeta').innerHTML = `
+        <div class="text-center py-20">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+          </div>
+          <h2 class="text-3xl font-bold mb-2">Blog Not Found</h2>
+          <p class="text-gray-500 mb-6">The requested article does not exist.</p>
+          <a href="index.html" class="inline-block px-6 py-3 bg-primary-600 text-white rounded-xl font-semibold hover:bg-primary-700 transition">Browse All Articles</a>
+        </div>
+      `;
+      document.getElementById('blogHero').style.display = 'none';
+      document.getElementById('blogContent').style.display = 'none';
+      document.getElementById('blogTags').style.display = 'none';
+      document.querySelector('.mt-8.flex').style.display = 'none';
+      document.getElementById('relatedGrid').parentElement.parentElement.style.display = 'none';
+    }
+
+    // Reading progress
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('readProgress').style.width = (scrollTop / scrollHeight * 100) + '%';
+    });
+
+    function toggleDark() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    function shareTwitter() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(blog ? blog.title : 'Check out this article');
+      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    }
+
+    function shareLinkedIn() {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const tooltip = document.getElementById('copyTooltip');
+        tooltip.style.opacity = '1';
+        setTimeout(() => tooltip.style.opacity = '0', 2000);
+      });
+    }
+
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </body>
 </html>
