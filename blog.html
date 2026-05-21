@@ -63,7 +63,6 @@
 
   <div id="read-progress"></div>
 
-  <!-- Navbar -->
   <nav class="fixed top-0 w-full z-50 border-b border-paper-200 dark:border-[#1f1f1f] bg-paper-50/80 dark:bg-[#0f0f0f]/80 backdrop-blur-md transition-colors duration-500">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="index.html" class="flex items-baseline gap-2 group">
@@ -76,33 +75,25 @@
           <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 3v2.25m6.36.39-1.59 1.59M21 12h-2.25m-.39 6.36-1.59-1.59M12 18.75V21m-4.77-4.23-1.59 1.59M5.25 12H3m4.23-4.77L5.64 5.64M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
         </button>
         <a href="index.html" class="text-sm font-medium opacity-60 hover:opacity-100 transition-opacity flex items-center gap-1">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
-          Index
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg> Index
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- Article -->
   <article class="pt-28 px-6">
     <div class="max-w-3xl mx-auto">
       <div id="articleMeta" class="reveal pt-8 pb-12"></div>
     </div>
   </article>
 
-  <!-- Hero Image -->
   <div class="max-w-5xl mx-auto px-6 mb-16">
     <div id="articleHero" class="img-zoom rounded-xl reveal reveal-delay-1"></div>
   </div>
 
-  <!-- Content -->
   <div class="max-w-3xl mx-auto px-6 pb-20">
     <div id="articleContent" class="prose dark:prose-invert reveal reveal-delay-2"></div>
-
-    <!-- Tags -->
     <div id="articleTags" class="mt-16 pt-8 border-t border-ink/10 dark:border-white/10 reveal reveal-delay-2"></div>
-
-    <!-- Share -->
     <div class="mt-8 flex items-center gap-4 reveal reveal-delay-2">
       <span class="font-mono text-xs tracking-widest uppercase opacity-40">Share</span>
       <button onclick="shareTwitter()" class="p-2 rounded-full border border-ink/15 dark:border-white/15 hover:border-ink/40 dark:hover:border-white/40 transition-colors opacity-60 hover:opacity-100">
@@ -118,7 +109,6 @@
     </div>
   </div>
 
-  <!-- Related -->
   <section class="px-6 pb-24">
     <div class="max-w-6xl mx-auto">
       <div class="border-t border-ink/10 dark:border-white/10 pt-16">
@@ -128,7 +118,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="px-6 py-12 border-t border-ink/10 dark:border-white/10">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-baseline gap-2">
@@ -138,14 +127,37 @@
       <p class="text-sm opacity-40">Crafted for the modern web.</p>
       <div class="flex gap-6">
         <a href="#" class="opacity-40 hover:opacity-100 transition-opacity"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="#" class="opacity-40 hover:opacity-100 transition-opacity"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
+        <a href="#" class="opacity-40 hover:opacity-100 transition-opacity"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3 .405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
       </div>
     </div>
   </footer>
 
-  <!-- DATA -->
   <script>
     const blogs = [
+      { id: 16, title: "The Ethics of AI-Generated Content", category: "Technology", date: "2026-06-02", readTime: 8,
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
+        description: "Navigating the moral landscape of machine-generated art, code, and journalism in an era of synthetic creativity.",
+        content: `<p class="mb-6">As AI systems become capable of producing text, images, and code indistinguishable from human output, we face profound ethical questions about authorship, authenticity, and accountability.</p><p class="mb-6">The line between tool and creator blurs when a model trained on millions of human works generates a bestseller or award-winning image. Who owns the output? Who is responsible for its flaws?</p><h2 class="text-3xl font-bold mb-4">Attribution & Ownership</h2><p class="mb-6">Current copyright frameworks were not designed for non-human creators. Courts and legislatures worldwide are grappling with whether AI-generated works qualify for protection, or if they infringe on the training data used to build them.</p><h2 class="text-3xl font-bold mb-4">Transparency & Trust</h2><p class="mb-6">The most immediate ethical obligation is transparency. Readers, users, and consumers deserve to know when content is AI-generated. Disclosure builds trust and preserves the social contract between creators and audiences.</p>` },
+      { id: 15, title: "Responsive Typography: A Modern Approach", category: "Design", date: "2026-06-01", readTime: 6,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1200&auto=format&fit=crop",
+        description: "How fluid type scales, viewport units, and clamp() are revolutionizing the way we size text across devices.",
+        content: `<p class="mb-6">Fixed breakpoints for typography are a relic of the past. Modern web design demands type that breathes and adapts continuously across the infinite spectrum of screen sizes.</p><p class="mb-6">CSS clamp(), viewport units, and fluid type scales allow text to resize smoothly between minimum and maximum values, eliminating jarring jumps at arbitrary breakpoints.</p><h2 class="text-3xl font-bold mb-4">The Fluid Formula</h2><p class="mb-6">A well-designed fluid scale uses a combination of viewport width and rem units to ensure accessibility. Users who zoom their browser still see appropriately sized text, while the base scale adapts to device context.</p><h2 class="text-3xl font-bold mb-4">Practical Implementation</h2><p class="mb-6">Start with a modular scale. Define your minimum and maximum sizes, then use calc() and clamp() to bridge them. Tools like Utopia.fyi generate complete fluid type systems with a few parameters.</p>` },
+      { id: 14, title: "Edge Computing: The Next Frontier", category: "Development", date: "2026-05-30", readTime: 9,
+        image: "https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=1200&auto=format&fit=crop",
+        description: "Why moving computation closer to users is reshaping cloud architecture and enabling real-time experiences.",
+        content: `<p class="mb-6">The centralized cloud model is being challenged by a distributed paradigm where computation happens at the network edge, milliseconds from the end user.</p><p class="mb-6">Edge computing reduces latency, minimizes bandwidth costs, and enables real-time interactions that would be impossible if every request had to round-trip to a distant data center.</p><h2 class="text-3xl font-bold mb-4">Use Cases</h2><p class="mb-6">Autonomous vehicles, industrial IoT, augmented reality, and multiplayer gaming all require sub-50ms response times. Edge nodes placed in ISP networks, cell towers, and even customer premises make this feasible.</p><h2 class="text-3xl font-bold mb-4">The Developer Experience</h2><p class="mb-6">Platforms like Cloudflare Workers, Vercel Edge Functions, and AWS Lambda@Edge abstract away infrastructure complexity. Developers write functions that deploy globally in seconds, running at the edge without managing servers.</p>` },
+      { id: 13, title: "The State of Web3 in 2026", category: "Technology", date: "2026-05-28", readTime: 10,
+        image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1200&auto=format&fit=crop",
+        description: "Beyond the hype: how decentralized technologies are finding real utility in identity, finance, and digital ownership.",
+        content: `<p class="mb-6">The conversation around Web3 has shifted dramatically. What began as speculative frenzy has matured into infrastructure-building for decentralized identity, verifiable credentials, and programmable money.</p><p class="mb-6">Smart contracts are no longer novelties &mdash; they power real financial rails, supply chain verification, and creator economies where artists retain perpetual royalties.</p><h2 class="text-3xl font-bold mb-4">Decentralized Identity</h2><p class="mb-6">Self-sovereign identity (SSI) lets individuals own and control their credentials without relying on centralized authorities. This shifts power from institutions to users.</p><h2 class="text-3xl font-bold mb-4">The Road Ahead</h2><p class="mb-6">Scalability remains the primary challenge. Layer-2 solutions, zero-knowledge proofs, and modular blockchain architectures are converging to make decentralized apps feasible at consumer scale.</p>` },
+      { id: 12, title: "Building Design Systems That Scale", category: "Design", date: "2026-05-27", readTime: 8,
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1200&auto=format&fit=crop",
+        description: "A practical guide to creating component libraries, tokens, and documentation that grow with your organization.",
+        content: `<p class="mb-6">Design systems fail when they become too rigid or too abstract. The sweet spot lies in balancing consistency with flexibility &mdash; giving teams guardrails without handcuffs.</p><p class="mb-6">Tokens, not values. Component APIs, not layouts. These principles ensure your system evolves with product needs rather than fighting them.</p><h2 class="text-3xl font-bold mb-4">Tokens First</h2><p class="mb-6">Design tokens are the single source of truth for color, typography, spacing, and elevation. They bridge design tools and code, ensuring changes propagate everywhere instantly.</p><h2 class="text-3xl font-bold mb-4">Governance & Culture</h2><p class="mb-6">The best design systems have dedicated owners, clear contribution guidelines, and a culture of shared ownership. Without governance, entropy wins.</p>` },
+      { id: 11, title: "Rust vs Go: Choosing Your Next Language", category: "Development", date: "2026-05-26", readTime: 9,
+        image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=1200&auto=format&fit=crop",
+        description: "A developer's field guide to picking between Rust's zero-cost abstractions and Go's brutal simplicity for your next project.",
+        content: `<p class="mb-6">Rust and Go represent two philosophies of systems programming. Rust prioritizes memory safety without garbage collection; Go prioritizes developer velocity and simple concurrency.</p><p class="mb-6">The choice depends on what you are optimizing for: raw performance and safety guarantees, or rapid iteration and team scalability.</p><h2 class="text-3xl font-bold mb-4">When to Choose Rust</h2><p class="mb-6">Use Rust for performance-critical paths, embedded systems, WebAssembly targets, and anywhere memory safety bugs are unacceptable. The borrow checker is a steep cliff but a rewarding summit.</p><h2 class="text-3xl font-bold mb-4">When to Choose Go</h2><p class="mb-6">Go shines in network services, cloud infrastructure, and teams where readability and fast compilation matter more than absolute performance. Goroutines make concurrency feel effortless.</p>` },
       { id: 10, title: "UX Psychology: Designing for the Human Mind", category: "Design", date: "2026-05-25", readTime: 7,
         image: "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?q=80&w=1200&auto=format&fit=crop",
         description: "How cognitive psychology principles can transform your design workflow and create interfaces that truly resonate with users.",
@@ -201,8 +213,7 @@
     }
 
     if (blog) {
-      document.title = `${blog.title} — BlogSphere`;
-
+      document.title = `${blog.title} \u2014 BlogSphere`;
       document.getElementById('articleMeta').innerHTML = `
         <div class="flex items-center gap-3 mb-6">
           <span class="w-2 h-2 rounded-full ${catDot[blog.category]}"></span>
@@ -215,22 +226,15 @@
         <h1 class="font-serif text-4xl md:text-6xl font-medium leading-[1.1] tracking-tight">${blog.title}</h1>
         <p class="mt-6 text-xl opacity-50 leading-relaxed max-w-xl">${blog.description}</p>
       `;
-
-      document.getElementById('articleHero').innerHTML = `
-        <img src="${blog.image}" class="w-full h-[280px] md:h-[450px] object-cover rounded-xl" alt="${blog.title}">
-      `;
-
+      document.getElementById('articleHero').innerHTML = `<img src="${blog.image}" class="w-full h-[280px] md:h-[450px] object-cover rounded-xl" alt="${blog.title}">`;
       document.getElementById('articleContent').innerHTML = blog.content;
-
       document.getElementById('articleTags').innerHTML = `
         <div class="flex flex-wrap items-center gap-2">
           <span class="font-mono text-xs tracking-widest uppercase opacity-40 mr-2">Tags</span>
           <span class="px-3 py-1.5 rounded-full border border-ink/15 dark:border-white/15 text-xs font-medium">${blog.category}</span>
           <span class="px-3 py-1.5 rounded-full border border-ink/15 dark:border-white/15 text-xs font-medium">2026</span>
           <span class="px-3 py-1.5 rounded-full border border-ink/15 dark:border-white/15 text-xs font-medium">Article</span>
-        </div>
-      `;
-
+        </div>`;
       const related = blogs.filter(b => b.id !== blog.id).slice(0, 3);
       document.getElementById('relatedGrid').innerHTML = related.map((b, i) => `
         <a href="blog.html?id=${b.id}" class="group block reveal" style="transition-delay: ${i * 0.1}s">
@@ -243,9 +247,7 @@
           </div>
           <h3 class="font-serif text-lg font-medium leading-snug group-hover:opacity-70 transition-opacity line-clamp-2">${b.title}</h3>
           <div class="flex items-center gap-2 font-mono text-[10px] opacity-40 tracking-wider mt-2">
-            <span>${formatDate(blog.date)}</span>
-            <span>&middot;</span>
-            <span>${b.readTime} MIN</span>
+            <span>${formatDate(blog.date)}</span><span>&middot;</span><span>${b.readTime} MIN</span>
           </div>
         </a>
       `).join('');
@@ -258,8 +260,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
             Back to all articles
           </a>
-        </div>
-      `;
+        </div>`;
       document.getElementById('articleHero').style.display = 'none';
       document.getElementById('articleContent').style.display = 'none';
       document.getElementById('articleTags').style.display = 'none';
@@ -267,20 +268,16 @@
       document.getElementById('relatedGrid').parentElement.parentElement.style.display = 'none';
     }
 
-    // Scroll progress
     window.addEventListener('scroll', () => {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       document.getElementById('read-progress').style.width = (scrollTop / scrollHeight * 100) + '%';
     });
 
-    // Reveal on scroll
     setTimeout(() => {
       document.querySelectorAll('.reveal').forEach(el => {
         const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-          });
+          entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
         }, { threshold: 0.1 });
         observer.observe(el);
       });
